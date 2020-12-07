@@ -3,15 +3,15 @@
 <ion-content>
 
   <div class="bg-img">
-    <h1>Today,</h1>
+    <h1>Aujourd'hui,</h1>
     <h5>{{currentDate}}</h5>
 
     <ion-card *ngFor="let task of allTasks">
 
         <ion-item>
-          <ion-checkbox [(ngModel)]="task.checked" color="success"></ion-checkbox>
+          <ion-checkbox [(ngModel)]="task.checked"  color="success"></ion-checkbox>
           <ion-label>
-            <h2 >{{task.text}} </h2>
+            <h2 style="text-decoration: line-through;">{{task.text}} </h2>
             <p>{{task.date}}</p>
           </ion-label>
         </ion-item>

@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
     this.getTasks();
   }
   getTasks() {
-    this.angFire.list('/Task').snapshotChanges(['child_added']).subscribe(
+    this.angFire.list('/Tascks').snapshotChanges(['child_added']).subscribe(
       (reponse) => {
         console.log(reponse);
         this.allTasks = [];

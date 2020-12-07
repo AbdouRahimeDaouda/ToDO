@@ -18,7 +18,7 @@ export class DonePage implements OnInit {
 
     const todayDate = new Date();
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    this.currentDate = todayDate.toLocaleDateString('ar-AR', options);
+    this.currentDate = todayDate.toLocaleDateString('fr-fr', options);
   }
   ngOnInit(){
     this.getTasks();
