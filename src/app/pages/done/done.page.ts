@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFireDatabase} from "@angular/fire/database";
-import {NavigationExtras, Router} from "@angular/router";
+import {AngularFireDatabase} from '@angular/fire/database';
+import {NavigationExtras, Router} from '@angular/router';
 
 
 

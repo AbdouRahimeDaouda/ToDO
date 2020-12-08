@@ -24,18 +24,22 @@ export class TodoPage implements OnInit {
     this.getTasks();
   }
   getTasks() {
-    this.angFire.list('/Tascks').snapshotChanges(['child_added']).subscribe(
+    //let userId = localStorage.getItem('uid');
+    let userId = JSON.parse(window.localStorage['uid']);
+
+    this.angFire.list('/Tascks', ref => ref.orderByChild('userId').equalTo(userId)).snapshotChanges(['child_added']).subscribe(
         (reponse) => {
           console.log(reponse);
           this.allTasks = [];
           reponse.forEach(element => {
-            console.log(element.payload);
+
             this.allTasks.push({
               key: element.key,
               text: element.payload.exportVal().text,
               checked: element.payload.exportVal().checked,
               date: element.payload.exportVal().date.substring(11, 16),
             });
+            
           });
         }
     );
@@ -47,10 +51,12 @@ export class TodoPage implements OnInit {
 
   }
   addNewTask() {
+     
     this.angFire.list('Tascks/').push({
       text: this.newTask,
       checked: false,
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      uid: JSON.parse(window.localStorage['uid'])
     });
     this.newTask = '';
   }
