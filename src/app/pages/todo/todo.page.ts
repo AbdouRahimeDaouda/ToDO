@@ -39,9 +39,12 @@ export class TodoPage implements OnInit {
           });
         }
     );
+
   }
   changeCheckedState(tsk) {
     this.angFire.object(`Tascks/${tsk.key}/checked`).set(tsk.checked);
+    //localStorage.setItem('myVal', JSON.stringify(this.allTasks.filter(t=>t.checked==false).length))
+
   }
   addNewTask() {
     this.angFire.list('Tascks/').push({

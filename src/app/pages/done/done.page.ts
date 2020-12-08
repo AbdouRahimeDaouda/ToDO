@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from "@angular/fire/database";
-import {Router} from "@angular/router";
-import {log} from "util";
+import {NavigationExtras, Router} from "@angular/router";
+
+
 
 @Component({
   selector: 'app-done',
@@ -43,6 +44,7 @@ export class DonePage implements OnInit {
           });
         }
     );
+
   }
   ionViewWillEnter(){
       this.getTasks()

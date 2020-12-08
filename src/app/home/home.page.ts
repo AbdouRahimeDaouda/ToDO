@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import {interval, Subscription} from "rxjs";
 
 
 @Component({
@@ -10,36 +11,42 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class HomePage implements OnInit {
 
+  data: number;
 
   allTasks = [];
+  private updateSubscription: Subscription;
 
-  constructor(private angFire: AngularFireDatabase) {
+  constructor(private angFire: AngularFireDatabase, ) {
 
 
   }
   ngOnInit(){
-    this.getTasks();
+     this.updateSubscription = interval(1).subscribe(
+       (val) => { this.getTasks()});
+
   }
+
+  // getBadgeVal(){
+  //   this.data = JSON.parse(localStorage.getItem('myVal'));
+  //   console.log("Did data load? : ",localStorage.getItem('myVal'));
+  // }
   getTasks() {
-    this.angFire.list('/Tascks').snapshotChanges(['child_added']).subscribe(
+  this.angFire.list('/Tascks').snapshotChanges(['child_added']).subscribe(
       (reponse) => {
         console.log(reponse);
         this.allTasks = [];
         reponse.forEach(element => {
-          if (element.payload.exportVal().checked == false) {
 
-            this.allTasks.push({
-              key: element.key,
-              text: element.payload.exportVal().text,
-              checked: element.payload.exportVal().checked,
-              date: element.payload.exportVal().date.substring(11, 16),
-            })
+          if (element.payload.exportVal().checked == false){this.allTasks.push({
 
-          }
+            checked: element.payload.exportVal().checked,
+
+          });}
+
         });
-      })
+      }
+  );
+  this.data=this.allTasks.length
+}
 
-  }
-
-
-  }
+}
